@@ -1,5 +1,6 @@
 <?php
 
+use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,13 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/inertia', function () {
+    return Inertia::render('ExampleComponent');
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::fallback(function () {
-    return abort(404);
-});
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
+Route::fallback(function () {
+    return abort(404);
+});
