@@ -16,7 +16,11 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/inertia', function () {
     return Inertia::render('ExampleComponent');
-});
+})->name('inertia');
+
+Route::get('/example', function () {
+    return Inertia::render('ExampleComponent2');
+})->name('example');
 
 Route::get('/', function () {
     return view('welcome');
@@ -24,7 +28,9 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::middleware('auth')->group(function () {
+    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+});
 
 Route::fallback(function () {
     return abort(404);

@@ -6,22 +6,42 @@ import { createInertiaApp } from '@inertiajs/inertia-vue'
 
 import { InertiaProgress } from '@inertiajs/progress'
 InertiaProgress.init({
-    delay: 250,
-    color: '#29d',
-    includeCSS: true,
-    showSpinner: false,
+  delay: 250,
+  color: '#29d',
+  includeCSS: true,
+  showSpinner: false,
 })
 
 import vuetify from './plugins/vuetify'
 
+//Vuex
+import Vuex from 'vuex'
+import storeData from "./store/index"
+Vue.use(Vuex)
+const store = new Vuex.Store(storeData);
+
 // Ziggy library with Vue
 Vue.prototype.$route = route
+
+// Inertia Link
+import { Link } from '@inertiajs/inertia-vue'
+Vue.component('inertia-link', Link)
+
+// Layouts
+Vue.component('layout-app', require('./layouts/App.vue').default);
+Vue.component('sidebar-app', require('./layouts/AppSidebar.vue').default);
+Vue.component('flash-messages', require('./layouts/FlashMessages.vue').default);
+
+// Components
+Vue.component('breadcrumbs', require('./components/Breadcrumbs.vue').default);
+Vue.component('container', require('./components/Container.vue').default);
 
 createInertiaApp({
   resolve: name => import(`./Pages/${name}`),
   setup({ el, App, props }) {
     new Vue({
       vuetify,
+      store,
       render: h => h(App, props),
     }).$mount(el)
   },
