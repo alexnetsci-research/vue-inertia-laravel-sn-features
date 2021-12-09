@@ -1,11 +1,19 @@
 <template>
-  <v-navigation-drawer
-    v-model="drawer"
-    class="navigation-drawer"
-    app
-    clipped
-    enable-resize-watcher
-  >
+  <v-navigation-drawer app v-model="drawer" :mini-variant.sync="mini">
+    <v-list-item class="px-2">
+      <v-list-item-avatar>
+        <v-img src="https://randomuser.me/api/portraits/men/85.jpg"></v-img>
+      </v-list-item-avatar>
+
+      <v-list-item-title>John Leider</v-list-item-title>
+
+      <v-btn icon @click.stop="mini = !mini">
+        <v-icon>mdi-chevron-left</v-icon>
+      </v-btn>
+    </v-list-item>
+
+    <v-divider></v-divider>
+
     <v-list nav dense>
       <inertia-link
         v-for="(route, index) in routes"
@@ -31,20 +39,22 @@
 export default {
   data() {
     return {
+      mini: true,
       routes: [
         {
-          name: "Inertia",
-          route: route("inertia"),
-          icon: "mdi-ab-testing",
+          name: "Flux",
+          route: route("flux"),
+          icon: "mdi-newspaper-variant-multiple",
         },
         {
-          name: "Example",
-          route: route("example"),
-          icon: "mdi-ab-testing",
+          name: "Test",
+          route: route("test"),
+          icon: "mdi-newspaper-variant-multiple",
         },
       ],
     };
   },
+
   computed: {
     drawer: {
       get() {

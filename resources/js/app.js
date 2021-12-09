@@ -34,7 +34,6 @@ Vue.component('flash-messages', require('./layouts/FlashMessages.vue').default);
 
 // Components
 Vue.component('breadcrumbs', require('./components/Breadcrumbs.vue').default);
-Vue.component('container', require('./components/Container.vue').default);
 
 createInertiaApp({
   resolve: name => import(`./Pages/${name}`),

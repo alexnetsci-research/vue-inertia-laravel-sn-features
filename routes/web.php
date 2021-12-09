@@ -14,13 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/inertia', function () {
-    return Inertia::render('ExampleComponent');
-})->name('inertia');
+Route::get('/flux', function () {
+    return inertia('Flux');
+})->name('flux');
 
-Route::get('/example', function () {
-    return Inertia::render('ExampleComponent2');
-})->name('example');
+Route::get('/test', function () {
+    return inertia('Test');
+})->name('test');
 
 Route::get('/', function () {
     return view('welcome');
