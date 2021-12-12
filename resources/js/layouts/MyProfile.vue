@@ -5,7 +5,7 @@
       absolute
       color="#fcb69f"
       dark
-      shrink-on-scroll
+      prominent
       :src="cover"
       scroll-target="#scrolling-techniques-2"
     >
@@ -139,8 +139,8 @@
             >
               <template v-slot:item="data">
                 <!-- <template v-if="(typeof data.item !== 'object')">
-                  <v-list-item-content v-text="data.item"></v-list-item-content>
-                </template> -->
+                    <v-list-item-content v-text="data.item"></v-list-item-content>
+                  </template> -->
                 <template>
                   <v-list-item link @click="visitUserProfile(data.item.id)">
                     <v-list-item-avatar v-if="data.item.profile.picture">
@@ -229,10 +229,9 @@
     <v-main>
       <v-sheet
         id="scrolling-techniques-2"
-        class="main-sheet-user overflow-y-auto"
-        max-height="900"
+        class="my-profile-layout-v-sheet overflow-y-auto"
       >
-        <v-container fluid class="mt-5">
+        <v-container class="my-profile-layout-main-sheet-container">
           <flash-messages></flash-messages>
           <slot></slot>
         </v-container>
@@ -241,6 +240,7 @@
 
     <v-bottom-navigation
       app
+      fixed
       :value="value"
       color="light-blue darken-2"
       horizontal
@@ -307,7 +307,9 @@ export default {
       };
     },
     visitUserProfile(data) {
-      return this.$inertia.visit(route("profiles.user", data));
+      return data === this.$page.props.auth.user.id
+        ? this.$inertia.visit(route("profiles.me", data))
+        : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile() {
       return this.$inertia.visit(

@@ -1,6 +1,13 @@
 <template>
   <v-app>
-    <v-app-bar app dark dense absolute class="app-layout-app-bar-color">
+    <v-app-bar
+      app
+      dark
+      dense
+      absolute
+      class="app-layout-app-bar-color"
+      scroll-target="#scrolling-techniques-1"
+    >
       <v-app-bar-nav-icon @click="visitMyProfile">
         <v-avatar class="profile-picture" size="30" color="white">
           <v-img
@@ -126,12 +133,18 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid style="height: 100%">
-        <slot></slot>
-      </v-container>
+      <v-sheet
+        id="scrolling-techniques-1"
+        class="my-profile-layout-v-sheet overflow-y-auto"
+      >
+        <v-container fluid class="my-profile-layout-main-sheet-container">
+          <flash-messages></flash-messages>
+          <slot></slot>
+        </v-container>
+      </v-sheet>
     </v-main>
 
-    <v-bottom-navigation app :value="value" color="primary" horizontal>
+    <v-bottom-navigation app fixed :value="value" color="primary" horizontal>
       <v-spacer></v-spacer>
 
       <v-btn @click="visitMyProfile">

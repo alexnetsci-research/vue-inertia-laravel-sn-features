@@ -113,6 +113,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: {
     profile: Object
@@ -126,15 +135,15 @@ __webpack_require__.r(__webpack_exports__);
       posts: [{
         title: "Post One",
         text: "This is the post one",
-        img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Logo_TVE-1.svg/1200px-Logo_TVE-1.svg.png'
+        img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Logo_TVE-1.svg/1200px-Logo_TVE-1.svg.png"
       }, {
         title: "Post Two",
         text: "This is the post two",
-        img: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Logo_TVE-2.svg'
+        img: "https://upload.wikimedia.org/wikipedia/commons/7/75/Logo_TVE-2.svg"
       }, {
         title: "Post Three",
         text: "This is the post three",
-        img: 'https://www.kidibot.ca/wp-content/uploads/2018/01/number.jpg'
+        img: "https://www.kidibot.ca/wp-content/uploads/2018/01/number.jpg"
       }],
       loading: false,
       selection: 1 // breadcrumbs: [
@@ -224,92 +233,118 @@ var render = function () {
         "v-container",
         { attrs: { fluid: "" } },
         [
-          _c(
-            "v-row",
-            { staticClass: "mx-auto flex-md-row flex-column" },
-            [
-              _c(
-                "v-col",
-                { staticClass: "col-md-6" },
+          _vm.$page.props.auth.user.id != _vm.profile.user.id
+            ? _c(
+                "v-row",
+                {
+                  staticClass: "mx-auto flex-md-row flex-column justify-center",
+                },
                 [
-                  _vm._l(_vm.posts, function (post, i) {
-                    return _c(
-                      "v-card",
-                      {
-                        key: i,
-                        staticClass: "mx-auto mb-5",
-                        on: {
-                          click: function ($event) {
-                            return _vm.openDialog(post)
-                          },
-                        },
-                      },
-                      [_c("v-card-title", [_vm._v(_vm._s(post.title))])],
-                      1
-                    )
-                  }),
-                  _vm._v(" "),
+                  _c("v-col", { staticClass: "col-md-6 text-center" }, [
+                    _c("h2", [
+                      _vm._v(
+                        _vm._s(_vm.profile.user.name) +
+                          " is not your friend yet!"
+                      ),
+                    ]),
+                  ]),
+                ],
+                1
+              )
+            : _c(
+                "v-row",
+                {
+                  staticClass: "mx-auto flex-md-row flex-column justify-center",
+                },
+                [
                   _c(
-                    "v-dialog",
-                    {
-                      attrs: {
-                        transition: "dialog-top-transition",
-                        "max-width": "600",
-                      },
-                      model: {
-                        value: _vm.dialog.state,
-                        callback: function ($$v) {
-                          _vm.$set(_vm.dialog, "state", $$v)
-                        },
-                        expression: "dialog.state",
-                      },
-                    },
+                    "v-col",
+                    { staticClass: "col-md-6" },
                     [
+                      _vm._l(_vm.posts, function (post, i) {
+                        return _c(
+                          "v-card",
+                          {
+                            key: i,
+                            staticClass: "mx-auto mb-5",
+                            on: {
+                              click: function ($event) {
+                                return _vm.openDialog(post)
+                              },
+                            },
+                          },
+                          [_c("v-card-title", [_vm._v(_vm._s(post.title))])],
+                          1
+                        )
+                      }),
+                      _vm._v(" "),
                       _c(
-                        "v-card",
+                        "v-dialog",
                         {
-                          staticClass: "mx-auto",
-                          attrs: { loading: _vm.loading, "max-width": "374" },
+                          attrs: {
+                            transition: "dialog-top-transition",
+                            "max-width": "600",
+                          },
+                          model: {
+                            value: _vm.dialog.state,
+                            callback: function ($$v) {
+                              _vm.$set(_vm.dialog, "state", $$v)
+                            },
+                            expression: "dialog.state",
+                          },
                         },
                         [
                           _c(
-                            "template",
-                            { slot: "progress" },
+                            "v-card",
+                            {
+                              staticClass: "mx-auto",
+                              attrs: {
+                                loading: _vm.loading,
+                                "max-width": "374",
+                              },
+                            },
                             [
-                              _c("v-progress-linear", {
+                              _c(
+                                "template",
+                                { slot: "progress" },
+                                [
+                                  _c("v-progress-linear", {
+                                    attrs: {
+                                      color: "deep-purple",
+                                      height: "10",
+                                      indeterminate: "",
+                                    },
+                                  }),
+                                ],
+                                1
+                              ),
+                              _vm._v(" "),
+                              _c("v-img", {
                                 attrs: {
-                                  color: "deep-purple",
-                                  height: "10",
-                                  indeterminate: "",
+                                  height: "250",
+                                  src: _vm.dialog.post.img,
                                 },
                               }),
+                              _vm._v(" "),
+                              _c("v-card-title", [
+                                _vm._v(_vm._s(_vm.dialog.post.title)),
+                              ]),
+                              _vm._v(" "),
+                              _c("v-card-text", [
+                                _vm._v(_vm._s(_vm.dialog.post.text)),
+                              ]),
                             ],
-                            1
+                            2
                           ),
-                          _vm._v(" "),
-                          _c("v-img", {
-                            attrs: { height: "250", src: _vm.dialog.post.img },
-                          }),
-                          _vm._v(" "),
-                          _c("v-card-title", [
-                            _vm._v(_vm._s(_vm.dialog.post.title)),
-                          ]),
-                          _vm._v(" "),
-                          _c("v-card-text", [
-                            _vm._v(_vm._s(_vm.dialog.post.text)),
-                          ]),
                         ],
-                        2
+                        1
                       ),
                     ],
-                    1
+                    2
                   ),
                 ],
-                2
+                1
               ),
-            ],
-            1
-          ),
         ],
         1
       ),

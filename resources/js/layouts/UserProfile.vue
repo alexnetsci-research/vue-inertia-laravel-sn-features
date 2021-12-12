@@ -5,13 +5,13 @@
       absolute
       color="#fcb69f"
       dark
-      shrink-on-scroll
+      prominent
       :src="
         this.profile.cover
           ? this.profile.cover
           : 'https://picsum.photos/1920/1080?random'
       "
-      scroll-target="#scrolling-techniques-2"
+      scroll-target="#scrolling-techniques-3"
     >
       <template v-slot:img="{ props }">
         <v-img
@@ -20,11 +20,7 @@
         ></v-img>
       </template>
 
-      <v-avatar
-        class="profile mr-3 mt-4"
-        size="90"
-        color="white"
-      >
+      <v-avatar class="profile mr-3 mt-4" size="90" color="white">
         <v-img
           v-if="profile.picture"
           alt="Profile Picture"
@@ -146,11 +142,10 @@
 
     <v-main>
       <v-sheet
-        id="scrolling-techniques-2"
-        class="main-sheet-user overflow-y-auto"
-        max-height="900"
+        id="scrolling-techniques-3"
+        class="my-profile-layout-v-sheet overflow-y-auto"
       >
-        <v-container fluid class="mt-5">
+        <v-container class="my-profile-layout-main-sheet-container">
           <flash-messages></flash-messages>
           <slot></slot>
         </v-container>
@@ -159,6 +154,7 @@
 
     <v-bottom-navigation
       app
+      fixed
       :value="value"
       color="light-blue darken-2"
       horizontal
@@ -182,7 +178,7 @@
 
 <script>
 export default {
-  props: ['profile'],
+  props: ["profile"],
 
   data() {
     return {
@@ -201,7 +197,9 @@ export default {
 
   methods: {
     visitUserProfile(data) {
-      return data == this.$page.props.auth.user.id ? this.$inertia.visit(route("profiles.me", data)) : this.$inertia.visit(route("profiles.user", data));
+      return data === this.$page.props.auth.user.id
+        ? this.$inertia.visit(route("profiles.me", data))
+        : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile() {
       return this.$inertia.visit(

@@ -5,7 +5,19 @@
     </div> -->
 
     <v-container fluid>
-      <v-row class="mx-auto flex-md-row flex-column">
+      <v-row
+        v-if="$page.props.auth.user.id != profile.user.id"
+        class="mx-auto flex-md-row flex-column justify-center"
+      >
+        <v-col class="col-md-6 text-center">
+          <h2>{{ profile.user.name }} is not your friend yet!</h2>
+        </v-col>
+      </v-row>
+
+      <v-row
+        v-else
+        class="mx-auto flex-md-row flex-column justify-center"
+      >
         <!-- <v-col class="col-md-6">
           <v-card :loading="loading" class="mx-auto mb-5">
             <template slot="progress">
@@ -58,14 +70,11 @@
                 ></v-progress-linear>
               </template>
 
-              <v-img
-                height="250"
-                :src="dialog.post.img"
-              ></v-img>
+              <v-img height="250" :src="dialog.post.img"></v-img>
 
               <v-card-title>{{ dialog.post.title }}</v-card-title>
 
-              <v-card-text>{{ dialog.post.text }}</v-card-text>
+              <v-card-text>{{ dialog.post.text }}</v-card-text> 
 
               <!-- <v-divider class="mx-4"></v-divider>
 
@@ -113,9 +122,21 @@ export default {
         post: Object,
       },
       posts: [
-        { title: "Post One", text: "This is the post one", img: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Logo_TVE-1.svg/1200px-Logo_TVE-1.svg.png' },
-        { title: "Post Two", text: "This is the post two", img: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Logo_TVE-2.svg' },
-        { title: "Post Three", text: "This is the post three", img: 'https://www.kidibot.ca/wp-content/uploads/2018/01/number.jpg' },
+        {
+          title: "Post One",
+          text: "This is the post one",
+          img: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/19/Logo_TVE-1.svg/1200px-Logo_TVE-1.svg.png",
+        },
+        {
+          title: "Post Two",
+          text: "This is the post two",
+          img: "https://upload.wikimedia.org/wikipedia/commons/7/75/Logo_TVE-2.svg",
+        },
+        {
+          title: "Post Three",
+          text: "This is the post three",
+          img: "https://www.kidibot.ca/wp-content/uploads/2018/01/number.jpg",
+        },
       ],
       loading: false,
       selection: 1,

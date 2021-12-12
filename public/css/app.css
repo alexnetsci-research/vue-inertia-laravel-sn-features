@@ -26221,14 +26221,16 @@
     transform: rotate(359deg);
   }
 }
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
 /*
 * main
 */
 body::-webkit-scrollbar {
-  display: none;
-}
-
-.v-sheet::-webkit-scrollbar {
   display: none;
 }
 
@@ -26243,13 +26245,6 @@ body {
   /* Firefox */
 }
 
-.v-sheet {
-  -ms-overflow-style: none;
-  /* IE and Edge */
-  scrollbar-width: none;
-  /* Firefox */
-}
-
 .v-dialog {
   -ms-overflow-style: none;
   /* IE and Edge */
@@ -26257,8 +26252,32 @@ body {
   /* Firefox */
 }
 
-main, .main-sheet-user {
+html, body {
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.v-application {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+.v-application--wrap {
+  height: 100% !important;
+  min-height: 100% !important;
+}
+
+main {
+  height: 100% !important;
   background-color: #f0f2f5 !important;
+}
+
+.v-main__wrap {
+  height: 100% !important;
+}
+
+.my-profile-layout-v-sheet {
+  height: 100% !important;
 }
 
 /*
@@ -26288,10 +26307,6 @@ main, .main-sheet-user {
 
 .profile_cover_icon {
   position: absolute !important;
-}
-
-.v-navigation-drawer {
-  transition-duration: 0.7s !important;
 }
 
 .auth-footer {
