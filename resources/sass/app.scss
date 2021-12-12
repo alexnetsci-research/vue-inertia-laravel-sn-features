@@ -37,11 +37,58 @@ body {
     scrollbar-width: none;  /* Firefox */
 }
 
+main, .main-sheet-user {
+    background-color: #f0f2f5 !important;
+}
+
 /*
 * in-app
 */
+
+// App Bar Title
+.v-app-bar-title__content {
+    width: auto !important;
+}
+
+.app-layout-app-bar-color {
+    background: linear-gradient(to top right, rgba(19,84,122,.5), rgba(128,208,199,.8));
+}
+
+// Login
+.v-text-field.v-text-field--enclosed .v-text-field__details {
+    margin-bottom: 3px !important;
+}
+
+// Flux page -> view the post in bottom sheet
 .v-dialog {
     width: auto !important;
     height: auto !important;
     overflow-y: scroll !important;
+} 
+
+// Profile Picture 
+.profile-picture {
+    cursor: pointer;
+}
+
+.profile_cover_icon {
+    position: absolute !important;
+}
+
+// Navbar
+.v-navigation-drawer {
+    transition-duration: 0.7s !important;
+}
+
+// Footer {
+.auth-footer {
+    padding: 5px !important;
+} 
+
+.auth-footer-text-flux {
+    color: #0288D1 !important;
+}
+
+.auth-footer-text {
+    color: #78909C !important;
 }

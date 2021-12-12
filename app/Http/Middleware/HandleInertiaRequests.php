@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Inertia\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -46,6 +47,21 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'message' => fn () => $request->session()->get('message')
             ],
+            'auth.user' => function () {
+                if (auth()->user()) {
+                    return [
+                        'id' => auth()->user()->id,
+                        'name' => auth()->user()->name,
+                        'email' => auth()->user()->email,
+                        'picture' => auth()->user()->profile->picture,
+                        'cover' => auth()->user()->profile->cover,
+                        // 'role' => optional(auth()->user()->roles->first())->name,
+                    ];
+                }
+            },
+            'user_profiles' => function () {
+                return User::with('profile')->get();
+            }
         ]);
     }
 }

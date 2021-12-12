@@ -14,22 +14,27 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/flux', function () {
-    return inertia('Flux');
-})->name('flux');
+Route::get('/', [App\Http\Controllers\Auth\LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'])->name('login.attempt');
+Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
-Route::get('/test', function () {
-    return inertia('Test');
-})->name('test');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
-Auth::routes();
+Auth::routes([
+    'login' => false,
+    'register' => false
+]);
 
 Route::middleware('auth')->group(function () {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/flux', [App\Http\Controllers\HomeController::class, 'index'])->name('flux');
+
+    Route::get('/{id}', [App\Http\Controllers\ProfileController::class, 'showMyProfile'])->name('profiles.me');
+    Route::get('/{id}/profile', [App\Http\Controllers\ProfileController::class, 'showUserProfile'])->name('profiles.user');
+    Route::post('/profile/picture', [App\Http\Controllers\ProfileController::class, 'uploadProfilePicture'])->name('profiles.upload_profile_picture');
+    Route::post('/profile/cover', [App\Http\Controllers\ProfileController::class, 'uploadProfileCover'])->name('profiles.upload_profile_cover');
 });
 
 Route::fallback(function () {

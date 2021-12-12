@@ -1,25 +1,44 @@
 <template>
   <v-app>
-    <v-app-bar app dark dense absolute class="app-layout-app-bar-color">
-      <v-app-bar-nav-icon @click="visitMyProfile">
-        <v-avatar class="profile-picture" size="30" color="white">
-          <v-img
-            v-if="$page.props.auth.user.picture"
-            alt="Profile Picture"
-            :src="$page.props.auth.user.picture"
-            :lazy-src="$page.props.auth.user.picture"
-          ></v-img>
-          <v-icon v-else large color="light-blue darken-2">mdi-account</v-icon>
-        </v-avatar>
-      </v-app-bar-nav-icon>
+    <v-app-bar
+      app
+      absolute
+      color="#fcb69f"
+      dark
+      shrink-on-scroll
+      :src="
+        this.profile.cover
+          ? this.profile.cover
+          : 'https://picsum.photos/1920/1080?random'
+      "
+      scroll-target="#scrolling-techniques-2"
+    >
+      <template v-slot:img="{ props }">
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        ></v-img>
+      </template>
 
-      <v-toolbar-title>Flux</v-toolbar-title>
+      <v-avatar
+        class="profile mr-3 mt-4"
+        size="90"
+        color="white"
+      >
+        <v-img
+          v-if="profile.picture"
+          alt="Profile Picture"
+          :src="profile.picture"
+          :lazy-src="profile.picture"
+        ></v-img>
+        <v-icon v-else large color="light-blue darken-2">mdi-account</v-icon>
+      </v-avatar>
+
+      <v-app-bar-title>
+        Welcome on {{ profile.user.name }}'s profile!
+      </v-app-bar-title>
 
       <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
 
       <v-dialog v-model="searchDialog" max-width="600px">
         <template v-slot:activator="{ on, attrs }">
@@ -126,12 +145,24 @@
     </v-app-bar>
 
     <v-main>
-      <v-container fluid style="height: 100%">
-        <slot></slot>
-      </v-container>
+      <v-sheet
+        id="scrolling-techniques-2"
+        class="main-sheet-user overflow-y-auto"
+        max-height="900"
+      >
+        <v-container fluid class="mt-5">
+          <flash-messages></flash-messages>
+          <slot></slot>
+        </v-container>
+      </v-sheet>
     </v-main>
 
-    <v-bottom-navigation app :value="value" color="primary" horizontal>
+    <v-bottom-navigation
+      app
+      :value="value"
+      color="light-blue darken-2"
+      horizontal
+    >
       <v-spacer></v-spacer>
 
       <v-btn @click="visitMyProfile">
@@ -151,6 +182,8 @@
 
 <script>
 export default {
+  props: ['profile'],
+
   data() {
     return {
       people: this.$page.props.user_profiles,
@@ -163,15 +196,12 @@ export default {
           icon: "mdi-newspaper-variant-multiple",
         },
       ],
-      form: {
-        profile_picture: null,
-      },
     };
   },
 
   methods: {
     visitUserProfile(data) {
-      return this.$inertia.visit(route("profiles.user", data));
+      return data == this.$page.props.auth.user.id ? this.$inertia.visit(route("profiles.me", data)) : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile() {
       return this.$inertia.visit(

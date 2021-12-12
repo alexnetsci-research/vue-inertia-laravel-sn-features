@@ -29,6 +29,9 @@ Vue.component('inertia-link', Link)
 
 // Layouts
 Vue.component('layout-app', require('./layouts/App.vue').default);
+Vue.component('layout-my-profile', require('./layouts/MyProfile.vue').default);
+Vue.component('layout-user-profile', require('./layouts/UserProfile.vue').default);
+Vue.component('layout-auth', require('./layouts/Auth.vue').default);
 Vue.component('sidebar-app', require('./layouts/AppSidebar.vue').default);
 Vue.component('flash-messages', require('./layouts/FlashMessages.vue').default);
 

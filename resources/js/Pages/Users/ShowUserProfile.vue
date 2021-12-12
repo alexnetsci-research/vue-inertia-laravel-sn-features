@@ -1,11 +1,39 @@
 <template>
-  <layout-app>
-    <!-- <div>
+  <layout-user-profile :profile="profile">
+    <!-- <div v-if="$vuetify.breakpoint.lgAndUp">
       <breadcrumbs :list="breadcrumbs" />
     </div> -->
 
     <v-container fluid>
-      <v-row class="mx-auto">
+      <v-row class="mx-auto flex-md-row flex-column">
+        <!-- <v-col class="col-md-6">
+          <v-card :loading="loading" class="mx-auto mb-5">
+            <template slot="progress">
+              <v-progress-linear
+                color="deep-purple"
+                height="10"
+                indeterminate
+              ></v-progress-linear>
+            </template>
+
+            <v-card-title>About me</v-card-title>
+
+            <v-card-text> </v-card-text>
+
+            <v-divider class="mx-4"></v-divider>
+
+            <v-card-title>My friends</v-card-title>
+
+            <v-card-text> </v-card-text>
+
+            <v-divider class="mx-4"></v-divider>
+
+            <v-card-title>My Pictures</v-card-title>
+
+            <v-card-text> </v-card-text>
+          </v-card>
+        </v-col> -->
+
         <v-col class="col-md-6">
           <v-card
             class="mx-auto mb-5"
@@ -69,11 +97,15 @@
         </v-col>
       </v-row>
     </v-container>
-  </layout-app>
+  </layout-user-profile>
 </template>
 
 <script>
 export default {
+  props: {
+    profile: Object,
+  },
+
   data() {
     return {
       dialog: {
@@ -85,14 +117,18 @@ export default {
         { title: "Post Two", text: "This is the post two", img: 'https://upload.wikimedia.org/wikipedia/commons/7/75/Logo_TVE-2.svg' },
         { title: "Post Three", text: "This is the post three", img: 'https://www.kidibot.ca/wp-content/uploads/2018/01/number.jpg' },
       ],
-      sheet: false,
       loading: false,
       selection: 1,
       // breadcrumbs: [
       //   {
       //     text: "Flux",
-      //     disabled: true,
+      //     disabled: false,
       //     href: route("flux"),
+      //   },
+      //   {
+      //     text: "My Profile",
+      //     disabled: true,
+      //     href: route("profiles.user", this.$page.props.auth.user.id),
       //   },
       // ],
     };
@@ -106,7 +142,7 @@ export default {
     reserve() {
       this.loading = true;
 
-      setTimeout(() => (this.loading = false), 1000);
+      setTimeout(() => (this.loading = false), 2000);
     },
   },
 };
