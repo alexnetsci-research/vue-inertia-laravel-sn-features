@@ -23,7 +23,8 @@ class AddRolesAndUsers extends Migration
         ]);
 
         Profile::create([
-            'user_id' => $alex->id
+            'user_id' => $alex->id,
+            'slug' => $alex->name
         ]);
 
         $roxy = User::create([
@@ -33,7 +34,8 @@ class AddRolesAndUsers extends Migration
         ]);
 
         Profile::create([
-            'user_id' => $roxy->id
+            'user_id' => $roxy->id,
+            'slug' => $roxy->name
         ]);
 
         $david = User::create([
@@ -43,7 +45,8 @@ class AddRolesAndUsers extends Migration
         ]);
 
         Profile::create([
-            'user_id' => $david->id
+            'user_id' => $david->id,
+            'slug' => $david->name
         ]);
     }
 

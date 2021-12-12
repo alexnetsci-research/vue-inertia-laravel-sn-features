@@ -10,6 +10,17 @@
           <v-card-text>
             <v-form @submit.prevent="submit">
               <v-text-field
+                v-model="form.name"
+                label="Name"
+                type="text"
+                outlined
+                color="light-blue darken-2"
+                @keydown.enter="submit"
+                :error-messages="
+                  $page.props.errors.name ? $page.props.errors.name[0] : []
+                "
+              />
+              <v-text-field
                 v-model="form.email"
                 label="Email"
                 type="text"
@@ -33,6 +44,19 @@
                     : []
                 "
               />
+              <v-text-field
+                v-model="form.password_confirmation"
+                label="Password confirmation"
+                type="password"
+                outlined
+                color="light-blue darken-2"
+                @keydown.enter="submit"
+                :error-messages="
+                  $page.props.errors.password
+                    ? $page.props.errors.password[0]
+                    : []
+                "
+              />
             </v-form>
 
             <v-row class="flex-column mt-1" style="margin-bottom: 1px">
@@ -40,11 +64,11 @@
                 <v-btn
                   color="light-blue darken-2"
                   dark
-                  @click="submit"
                   large
                   class="col-9 font-weight-bold rounded-tl-xl"
                   elevation="3"
-                  >Login</v-btn
+                  @click="submit"
+                  >Create account</v-btn
                 >
               </v-col>
 
@@ -58,8 +82,8 @@
                   class="col-9 font-weight-bold rounded-br-xl"
                   elevation="3"
                   outlined
-                  @click="showRegistrationForm"
-                  >Create account</v-btn
+                  @click="showLoginForm"
+                  >Login</v-btn
                 >
               </v-col>
             </v-row>
@@ -80,25 +104,27 @@ export default {
     return {
       sending: false,
       form: {
+        name: "",
         email: "",
         password: "",
-        remember: false,
+        password_confirmation: "",
       },
     };
   },
 
   methods: {
-    showRegistrationForm() {
-      return this.$inertia.visit(route('registration.form'));
+    showLoginForm() {
+      return this.$inertia.visit(route("login"));
     },
     submit() {
       this.sending = true;
       this.$inertia.post(
-        route("login.attempt"),
+        route("register"),
         {
+          name: this.form.name,
           email: this.form.email,
           password: this.form.password,
-          remember: this.form.remember,
+          password_confirmation: this.form.password_confirmation,
         },
         {
           onFinish: (visit) => {

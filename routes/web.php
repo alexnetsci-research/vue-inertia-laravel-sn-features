@@ -19,9 +19,8 @@ Route::post('/login', [App\Http\Controllers\Auth\LoginController::class, 'login'
 Route::post('/logout', [App\Http\Controllers\Auth\LoginController::class, 'logout'])->name('logout');
 
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/register', [App\Http\Controllers\Auth\RegisterController::class, 'showRegistrationForm'])->name('registration.form');
+Route::post('/register', [App\Http\Controllers\Auth\RegisterController::class, 'register'])->name('register');
 
 Auth::routes([
     'login' => false,
@@ -31,7 +30,7 @@ Auth::routes([
 Route::middleware('auth')->group(function () {
     Route::get('/flux', [App\Http\Controllers\HomeController::class, 'index'])->name('flux');
 
-    Route::get('/{id}', [App\Http\Controllers\ProfileController::class, 'showMyProfile'])->name('profiles.me');
+    Route::get('/{user}', [App\Http\Controllers\ProfileController::class, 'showMyProfile'])->name('my.profile');
     Route::get('/{id}/profile', [App\Http\Controllers\ProfileController::class, 'showUserProfile'])->name('profiles.user');
     Route::post('/profile/picture', [App\Http\Controllers\ProfileController::class, 'uploadProfilePicture'])->name('profiles.upload_profile_picture');
     Route::post('/profile/cover', [App\Http\Controllers\ProfileController::class, 'uploadProfileCover'])->name('profiles.upload_profile_cover');

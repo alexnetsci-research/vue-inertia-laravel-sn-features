@@ -3,10 +3,14 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Models\User;
+use Inertia\Inertia;
 use App\Models\Profile;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Auth\Events\Registered;
 use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules\Password;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -43,6 +47,11 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+    public function showRegistrationForm()
+    {
+        return Inertia::render('Auth/Register');
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -57,7 +66,8 @@ class RegisterController extends Controller
             'password' => [
                 'required', 'string', 'confirmed', 
                 Password::min(8)->letters()->mixedCase()->numbers()->symbols()->uncompromised()
-            ]
+            ], 
+            // 'birthday' => ['required', 'date', 'before:today']
         ]);
     }
 
@@ -69,16 +79,48 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password'])
         ]);
 
-        // Profile::create([
-        //     'name' => $data['name'],
-        //     'email' => $data['email'],
-        //     'password' => Hash::make($data['password'])
+        Profile::create([
+            'user_id' => $user->id,
+            'slug' => $user->name
+        ]);
+
+        return $user;
+
+        // $user->profile()->create([
+        //     'birthday' => $data['birthday']
         // ]);
     }
+
+    public function register()
+    {
+        $this->validator(request()->all())->validate();
+
+        event(new Registered($user = $this->create(request()->all())));
+
+        $this->guard()->login($user);
+
+        if ($response = $this->registered(request(), $user)) {
+            return $response;
+        }
+
+        return request()->wantsJson()
+                    ? new JsonResponse([], 201)
+                    : redirect($this->redirectPath());
+    }
+
+    // protected function guard()
+    // {
+    //     return Auth::guard();
+    // }
+
+    // protected function registered(Request $request, $user)
+    // {
+    //     //
+    // }
 }

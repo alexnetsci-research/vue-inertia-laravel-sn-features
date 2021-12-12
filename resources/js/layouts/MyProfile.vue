@@ -1,14 +1,6 @@
 <template>
   <v-app>
-    <v-app-bar
-      app
-      absolute
-      color="#fcb69f"
-      dark
-      prominent
-      :src="cover"
-      scroll-target="#scrolling-techniques-2"
-    >
+    <v-app-bar app absolute color="#fcb69f" dark prominent :src="cover">
       <template v-slot:img="{ props }">
         <v-img
           v-bind="props"
@@ -76,7 +68,7 @@
       </v-dialog>
 
       <v-app-bar-title>
-        Welcome, {{ $page.props.auth.user.name }}!
+        {{ $page.props.auth.user.name }}
       </v-app-bar-title>
 
       <v-spacer></v-spacer>
@@ -227,10 +219,7 @@
     </v-app-bar>
 
     <v-main>
-      <v-sheet
-        id="scrolling-techniques-2"
-        class="my-profile-layout-v-sheet overflow-y-auto"
-      >
+      <v-sheet class="my-profile-layout-v-sheet overflow-y-auto">
         <v-container class="my-profile-layout-main-sheet-container">
           <flash-messages></flash-messages>
           <slot></slot>
@@ -247,13 +236,13 @@
     >
       <v-spacer></v-spacer>
 
-      <v-btn @click="visitMyProfile">
+      <v-btn small @click="visitMyProfile">
         <span>My Profile</span>
 
         <v-icon>mdi-account</v-icon>
       </v-btn>
 
-      <v-btn @click="visitFlux">
+      <v-btn small @click="visitFlux">
         <span>Flux</span>
 
         <v-icon>mdi-newspaper-variant-multiple</v-icon>
@@ -308,12 +297,12 @@ export default {
     },
     visitUserProfile(data) {
       return data === this.$page.props.auth.user.id
-        ? this.$inertia.visit(route("profiles.me", data))
+        ? this.$inertia.visit(route("my.profile", data))
         : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile() {
       return this.$inertia.visit(
-        route("profiles.me", this.$page.props.auth.user.id)
+        route("my.profile", this.$page.props.auth.user.id)
       );
     },
     visitFlux() {

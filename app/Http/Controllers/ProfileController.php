@@ -27,7 +27,7 @@ class ProfileController extends Controller
             'picture' => $url,
         ]);
 
-        return redirect()->route('profiles.me', [auth()->user()->id]);
+        return redirect()->route('my.profile', [auth()->user()->id]);
     }
 
     public function uploadProfileCover()
@@ -46,13 +46,13 @@ class ProfileController extends Controller
             'cover' => $url,
         ]);
 
-        return redirect()->route('profiles.me', [auth()->user()->id]);
+        return redirect()->route('my.profile', [auth()->user()->id]);
     }
 
-    public function showMyProfile($id)
+    public function showMyProfile(User $user)
     {
-        $profile = Profile::getMyProfile();
-        return Inertia::render('Users/ShowMyProfile', compact('profile'));
+        $user->myProfile();
+        return Inertia::render('Users/ShowMyProfile', compact('user'));
     }
 
     public function showUserProfile($id)

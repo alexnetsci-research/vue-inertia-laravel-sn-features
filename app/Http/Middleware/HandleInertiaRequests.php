@@ -60,7 +60,9 @@ class HandleInertiaRequests extends Middleware
                 }
             },
             'user_profiles' => function () {
-                return User::with('profile')->get();
+                if (auth()->user()) {
+                    return User::with('profile')->get();
+                }
             }
         ]);
     }

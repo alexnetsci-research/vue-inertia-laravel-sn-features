@@ -11,13 +11,26 @@
       >
         <v-col class="col-md-6 text-center">
           <h2>{{ profile.user.name }} is not your friend yet!</h2>
+          <p>
+            <v-btn
+              color="light-blue darken-2"
+              dark
+              elevation="3"
+              >Send friend request</v-btn
+            >
+
+            <!-- <v-btn
+              color="light-blue darken-2"
+              dark
+              elevation="3"
+              @click="sendFriendRequest(profile.user.id)"
+              >Send friend request</v-btn
+            > -->
+          </p>
         </v-col>
       </v-row>
 
-      <v-row
-        v-else
-        class="mx-auto flex-md-row flex-column justify-center"
-      >
+      <v-row v-else class="mx-auto flex-md-row flex-column justify-center">
         <!-- <v-col class="col-md-6">
           <v-card :loading="loading" class="mx-auto mb-5">
             <template slot="progress">
@@ -74,7 +87,7 @@
 
               <v-card-title>{{ dialog.post.title }}</v-card-title>
 
-              <v-card-text>{{ dialog.post.text }}</v-card-text> 
+              <v-card-text>{{ dialog.post.text }}</v-card-text>
 
               <!-- <v-divider class="mx-4"></v-divider>
 
@@ -156,6 +169,17 @@ export default {
   },
 
   methods: {
+    // sendFriendRequest(requested_user_id) {
+    //   axios
+    //     .post(route("send.request", requested_user_id), {
+    //       _method: "POST",
+    //     })
+    //     .then(({ data }) => {
+    //       this.$inertia.visit(data, {
+    //         preserveScroll: true,
+    //       });
+    //     });
+    // },
     openDialog(post) {
       this.dialog.state = true;
       this.dialog.post = post;

@@ -26285,6 +26285,13 @@ main {
 */
 .v-app-bar-title__content {
   width: auto !important;
+  visibility: visible !important;
+}
+
+.v-app-bar--is-scrolled {
+  width: auto !important;
+  visibility: visible !important;
+  font-size: 1.25rem !important;
 }
 
 .app-layout-app-bar-color {

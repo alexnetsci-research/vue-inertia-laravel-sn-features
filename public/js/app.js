@@ -3183,19 +3183,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3214,10 +3201,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     visitUserProfile: function visitUserProfile(data) {
-      return this.$inertia.visit(route("profiles.user", data));
+      return data === this.$page.props.auth.user.id ? this.$inertia.visit(route("my.profile", data)) : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile: function visitMyProfile() {
-      return this.$inertia.visit(route("profiles.me", this.$page.props.auth.user.id));
+      return this.$inertia.visit(route("my.profile", this.$page.props.auth.user.id));
     },
     visitFlux: function visitFlux() {
       return this.$inertia.visit(route("flux"));
@@ -3698,17 +3685,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
@@ -3746,10 +3722,10 @@ __webpack_require__.r(__webpack_exports__);
       };
     },
     visitUserProfile: function visitUserProfile(data) {
-      return data === this.$page.props.auth.user.id ? this.$inertia.visit(route("profiles.me", data)) : this.$inertia.visit(route("profiles.user", data));
+      return data === this.$page.props.auth.user.id ? this.$inertia.visit(route("my.profile", data)) : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile: function visitMyProfile() {
-      return this.$inertia.visit(route("profiles.me", this.$page.props.auth.user.id));
+      return this.$inertia.visit(route("my.profile", this.$page.props.auth.user.id));
     },
     visitFlux: function visitFlux() {
       return this.$inertia.visit(route("flux"));
@@ -3973,10 +3949,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   props: ["profile"],
   data: function data() {
@@ -3993,10 +3965,10 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     visitUserProfile: function visitUserProfile(data) {
-      return data === this.$page.props.auth.user.id ? this.$inertia.visit(route("profiles.me", data)) : this.$inertia.visit(route("profiles.user", data));
+      return data === this.$page.props.auth.user.id ? this.$inertia.visit(route("my.profile", data)) : this.$inertia.visit(route("profiles.user", data));
     },
     visitMyProfile: function visitMyProfile() {
-      return this.$inertia.visit(route("profiles.me", this.$page.props.auth.user.id));
+      return this.$inertia.visit(route("my.profile", this.$page.props.auth.user.id));
     },
     visitFlux: function visitFlux() {
       return this.$inertia.visit(route("flux"));
@@ -12827,13 +12799,7 @@ var render = function () {
         "v-app-bar",
         {
           staticClass: "app-layout-app-bar-color",
-          attrs: {
-            app: "",
-            dark: "",
-            dense: "",
-            absolute: "",
-            "scroll-target": "#scrolling-techniques-1",
-          },
+          attrs: { app: "", dark: "", dense: "", absolute: "" },
         },
         [
           _c(
@@ -13190,10 +13156,7 @@ var render = function () {
         [
           _c(
             "v-sheet",
-            {
-              staticClass: "my-profile-layout-v-sheet overflow-y-auto",
-              attrs: { id: "scrolling-techniques-1" },
-            },
+            { staticClass: "my-profile-layout-v-sheet overflow-y-auto" },
             [
               _c(
                 "v-container",
@@ -13227,7 +13190,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-btn",
-            { on: { click: _vm.visitMyProfile } },
+            { attrs: { small: "" }, on: { click: _vm.visitMyProfile } },
             [
               _c("span", [_vm._v("My Profile")]),
               _vm._v(" "),
@@ -13238,7 +13201,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-btn",
-            { on: { click: _vm.visitFlux } },
+            { attrs: { small: "" }, on: { click: _vm.visitFlux } },
             [
               _c("span", [_vm._v("Flux")]),
               _vm._v(" "),
@@ -13336,7 +13299,7 @@ var render = function () {
             "inertia-link",
             {
               staticClass: "text-decoration-none",
-              attrs: { href: _vm.$route("profiles.me") },
+              attrs: { href: _vm.$route("my.profile") },
             },
             [
               _c(
@@ -13672,7 +13635,6 @@ var render = function () {
             dark: "",
             prominent: "",
             src: _vm.cover,
-            "scroll-target": "#scrolling-techniques-2",
           },
           scopedSlots: _vm._u([
             {
@@ -13851,9 +13813,7 @@ var render = function () {
           _vm._v(" "),
           _c("v-app-bar-title", [
             _vm._v(
-              "\n      Welcome, " +
-                _vm._s(_vm.$page.props.auth.user.name) +
-                "!\n    "
+              "\n      " + _vm._s(_vm.$page.props.auth.user.name) + "\n    "
             ),
           ]),
           _vm._v(" "),
@@ -14297,10 +14257,7 @@ var render = function () {
         [
           _c(
             "v-sheet",
-            {
-              staticClass: "my-profile-layout-v-sheet overflow-y-auto",
-              attrs: { id: "scrolling-techniques-2" },
-            },
+            { staticClass: "my-profile-layout-v-sheet overflow-y-auto" },
             [
               _c(
                 "v-container",
@@ -14331,7 +14288,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-btn",
-            { on: { click: _vm.visitMyProfile } },
+            { attrs: { small: "" }, on: { click: _vm.visitMyProfile } },
             [
               _c("span", [_vm._v("My Profile")]),
               _vm._v(" "),
@@ -14342,7 +14299,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-btn",
-            { on: { click: _vm.visitFlux } },
+            { attrs: { small: "" }, on: { click: _vm.visitFlux } },
             [
               _c("span", [_vm._v("Flux")]),
               _vm._v(" "),
@@ -14395,7 +14352,6 @@ var render = function () {
             src: this.profile.cover
               ? this.profile.cover
               : "https://picsum.photos/1920/1080?random",
-            "scroll-target": "#scrolling-techniques-3",
           },
           scopedSlots: _vm._u([
             {
@@ -14449,11 +14405,7 @@ var render = function () {
           ),
           _vm._v(" "),
           _c("v-app-bar-title", [
-            _vm._v(
-              "\n      Welcome on " +
-                _vm._s(_vm.profile.user.name) +
-                "'s profile!\n    "
-            ),
+            _vm._v("\n      " + _vm._s(_vm.profile.user.name) + "\n    "),
           ]),
           _vm._v(" "),
           _c("v-spacer"),
@@ -14770,10 +14722,7 @@ var render = function () {
         [
           _c(
             "v-sheet",
-            {
-              staticClass: "my-profile-layout-v-sheet overflow-y-auto",
-              attrs: { id: "scrolling-techniques-3" },
-            },
+            { staticClass: "my-profile-layout-v-sheet overflow-y-auto" },
             [
               _c(
                 "v-container",
@@ -14804,7 +14753,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-btn",
-            { on: { click: _vm.visitMyProfile } },
+            { attrs: { small: "" }, on: { click: _vm.visitMyProfile } },
             [
               _c("span", [_vm._v("My Profile")]),
               _vm._v(" "),
@@ -14815,7 +14764,7 @@ var render = function () {
           _vm._v(" "),
           _c(
             "v-btn",
-            { on: { click: _vm.visitFlux } },
+            { attrs: { small: "" }, on: { click: _vm.visitFlux } },
             [
               _c("span", [_vm._v("Flux")]),
               _vm._v(" "),
@@ -45248,6 +45197,14 @@ var map = {
 		"./resources/js/Pages/Auth/Login.vue",
 		"resources_js_Pages_Auth_Login_vue"
 	],
+	"./Auth/Register": [
+		"./resources/js/Pages/Auth/Register.vue",
+		"resources_js_Pages_Auth_Register_vue"
+	],
+	"./Auth/Register.vue": [
+		"./resources/js/Pages/Auth/Register.vue",
+		"resources_js_Pages_Auth_Register_vue"
+	],
 	"./Flux": [
 		"./resources/js/Pages/Flux.vue",
 		"resources_js_Pages_Flux_vue"
@@ -45421,7 +45378,7 @@ module.exports = JSON.parse('{"name":"axios","version":"0.21.4","description":"P
 /******/ 		// This function allow to reference async chunks
 /******/ 		__webpack_require__.u = (chunkId) => {
 /******/ 			// return url for filenames based on template
-/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_Login_vue":"07e4331107a07ec0","resources_js_Pages_Flux_vue":"beecd94e371e3d76","resources_js_Pages_Users_ShowMyProfile_vue":"10f79cbef68ed362","resources_js_Pages_Users_ShowUserProfile_vue":"ba58875342af3c5e"}[chunkId] + "";
+/******/ 			return "js/" + chunkId + ".js?id=" + {"resources_js_Pages_Auth_Login_vue":"da9a08b980fdea39","resources_js_Pages_Auth_Register_vue":"f4c61e48dd758137","resources_js_Pages_Flux_vue":"db8989bd0c326da7","resources_js_Pages_Users_ShowMyProfile_vue":"143206d4bcc6c242","resources_js_Pages_Users_ShowUserProfile_vue":"a90f77a157990e7d"}[chunkId] + "";
 /******/ 		};
 /******/ 	})();
 /******/ 	

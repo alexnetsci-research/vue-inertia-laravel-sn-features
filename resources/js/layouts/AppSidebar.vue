@@ -7,7 +7,7 @@
   >
     <v-list>
       <inertia-link
-        :href="$route('profiles.me')"
+        :href="$route('my.profile')"
         class="text-decoration-none"
       >
         <v-list-item class="px-2">

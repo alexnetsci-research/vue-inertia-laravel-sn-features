@@ -6,7 +6,10 @@
 
     <v-container fluid>
       <v-row class="mx-auto flex-md-row flex-column">
-        <v-col class="col-md-6">
+        <v-col>
+          <h2>My Profile</h2>
+        </v-col>
+        <!-- <v-col class="col-md-6">
           <v-card :loading="loading" class="mx-auto mb-5">
             <template slot="progress">
               <v-progress-linear
@@ -166,35 +169,9 @@
               <v-card-title>{{ dialog.post.title }}</v-card-title>
 
               <v-card-text>{{ dialog.post.text }}</v-card-text>
-
-              <!-- <v-divider class="mx-4"></v-divider>
-
-              <v-card-title>Tonight's availability</v-card-title>
-
-              <v-card-text>
-                <v-chip-group
-                  v-model="selection"
-                  active-class="deep-purple accent-4 white--text"
-                  column
-                >
-                  <v-chip>5:30PM</v-chip>
-
-                  <v-chip>7:30PM</v-chip>
-
-                  <v-chip>8:00PM</v-chip>
-
-                  <v-chip>9:00PM</v-chip>
-                </v-chip-group>
-              </v-card-text>
-
-              <v-card-actions>
-                <v-btn color="deep-purple lighten-2" text @click="reserve">
-                  Reserve
-                </v-btn> -->
-              <!-- </v-card-actions> -->
             </v-card>
           </v-dialog>
-        </v-col>
+        </v-col> -->
       </v-row>
     </v-container>
   </layout-my-profile>
